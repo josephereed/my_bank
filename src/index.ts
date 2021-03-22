@@ -2,6 +2,7 @@ import express = require('express');
 import { Request, Response } from 'express';
 require('dotenv').config();
 import { Sequelize } from 'sequelize';
+import path = require('path')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 // configure database
 const sqlserver = new Sequelize(
   process.env.DATABASE!,
-  process.env.USERNAME!,
+  process.env.REMOTEUSERNAME!,
   process.env.PASSWORD!,
   {
     host: 'remotemysql.com',
@@ -17,6 +18,9 @@ const sqlserver = new Sequelize(
     port: 3306,
   }
 );
+
+// Setup CRA
+app.use(express.static(path.join(__dirname, '../src/client/build'))) 
 
 const connect = async () => {
   try {
@@ -29,9 +33,9 @@ const connect = async () => {
 
 connect();
 
+
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).send('benis');
-  console.log('sent');
+  res.sendFile(path.join(__dirname, '../src/client/build/index.html'))
 });
 
 app.listen(PORT, () => {
