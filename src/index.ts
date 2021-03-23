@@ -1,7 +1,7 @@
 // Modules
 import express = require('express');
 import path = require('path');
-import { Sequelize } from 'sequelize';
+require('./dbConnection');
 require('dotenv').config();
 require('./routes');
 require('./dbConnection');
