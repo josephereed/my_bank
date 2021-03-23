@@ -1,6 +1,6 @@
 import Sequelize = require('sequelize');
 
-import { sequelize } from '../dbConnection';
+import sequelize from '../dbConnection';
 
 const Acct_type = sequelize.define(
   'acct_type',
@@ -23,4 +23,4 @@ const Acct_type = sequelize.define(
   }
 );
 
-module.exports = Acct_type;
+export default Acct_type;

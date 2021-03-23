@@ -1,14 +1,16 @@
 // Modules
 import express = require('express');
 import path = require('path');
+import { sync } from './models/index';
 require('./dbConnection');
-require('dotenv').config();
 require('./routes');
-require('./dbConnection');
 
 // Server
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// DB
+sync()
 
 // Middlewares
 app.use(express.static(path.join(__dirname, '../src/client/build')));

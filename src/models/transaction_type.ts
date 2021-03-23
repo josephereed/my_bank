@@ -1,5 +1,6 @@
-import { sequelize } from '../dbConnection';
+import sequelize from '../dbConnection';
 import Sequelize = require('sequelize');
+import { Transaction } from 'sequelize';
 
 const TransactionType = sequelize.define(
   'transaction_type',
@@ -18,4 +19,4 @@ const TransactionType = sequelize.define(
   }
 );
 
-module.exports = TransactionType;
+export default TransactionType;

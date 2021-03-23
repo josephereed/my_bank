@@ -1,7 +1,8 @@
 import { Sequelize } from 'sequelize';
+require('dotenv').config();
 
 // configure database
-export const sequelize = new Sequelize(
+const sequelize = new Sequelize(
   process.env.DATABASE!,
   process.env.REMOTEUSERNAME!,
   process.env.PASSWORD!,
@@ -23,4 +24,4 @@ const connect = async () => {
 
 connect();
 
-module.exports = sequelize
+export default sequelize;

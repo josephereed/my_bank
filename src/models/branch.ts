@@ -1,4 +1,4 @@
-import { sequelize } from '../dbConnection';
+import sequelize from '../dbConnection';
 import Sequelize = require('sequelize');
 
 const Branch = sequelize.define(
@@ -38,4 +38,4 @@ const Branch = sequelize.define(
   }
 );
 
-module.exports = Branch;
+export default Branch;

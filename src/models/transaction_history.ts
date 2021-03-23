@@ -1,5 +1,5 @@
 import Sequelize = require('sequelize');
-import { sequelize } from '../dbConnection';
+import sequelize from '../dbConnection';
 
 const Transaction = sequelize.define(
   'transaction_history',
@@ -39,4 +39,4 @@ const Transaction = sequelize.define(
   }
 );
 
-module.exports = Transaction;
+export default Transaction;

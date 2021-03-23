@@ -2,7 +2,7 @@
 import Sequelize = require('sequelize');
 
 // import created connection
-import { sequelize } from '../dbConnection';
+import sequelize from '../dbConnection';
 
 const Customer = sequelize.define(
   'customer',
@@ -65,4 +65,4 @@ const Customer = sequelize.define(
   }
 );
 
-module.exports = Customer;
+export default Customer;

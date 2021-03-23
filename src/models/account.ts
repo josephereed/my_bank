@@ -1,5 +1,5 @@
 import Sequelize = require('sequelize');
-import { sequelize } from '../dbConnection';
+import  sequelize from '../dbConnection';
 
 const Account = sequelize.define(
   'account',
@@ -30,4 +30,4 @@ const Account = sequelize.define(
   }
 );
 
-module.exports = Account;
+export default Account;
