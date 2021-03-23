@@ -3,4 +3,5 @@ package-lock.json
 node_modules
 notes.txt
 src/client
-dist
+dist/
+dist/index.js
