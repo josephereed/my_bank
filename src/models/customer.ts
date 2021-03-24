@@ -1,62 +1,85 @@
 // import base module
-import Sequelize = require('sequelize');
+import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
 
 // import created connection
 import sequelize from '../dbConnection';
 
-const Customer = sequelize.define(
+interface CustomerAttributes {
+  cust_no: number;
+  branch_code: string;
+  cust_username: string;
+  cust_password: string;
+  cust_email: string;
+  cust_title: string;
+  cust_givenname: string;
+  cust_surname: string;
+  cust_address1: string;
+  cust_address2: string;
+  cust_city: string;
+  cust_zip: string;
+  cust_state: string;
+}
+
+interface CustomerCreationAttributes
+  extends Optional<CustomerAttributes, 'cust_email'> {}
+
+interface CustomerInstance
+  extends Model<CustomerAttributes, CustomerCreationAttributes>,
+    CustomerAttributes {}
+
+const Customer = sequelize.define<CustomerInstance>(
   'customer',
   {
     cust_no: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     branch_code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     cust_title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_givenname: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_surname: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_address1: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_address2: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     cust_city: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_zip: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_state: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

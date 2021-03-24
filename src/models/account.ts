@@ -1,27 +1,45 @@
-import Sequelize = require('sequelize');
-import  sequelize from '../dbConnection';
+import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
+import sequelize from '../dbConnection';
 
-const Account = sequelize.define(
+// Declare interface for attributes for strict typechecking
+interface AccountAttributes {
+  branch_code: string;
+  acct_no: string;
+  cust_no: number;
+  acct_type_id: string;
+  acct_balance: number;
+}
+
+// Optional attributes
+interface AccountCreationAttributes
+  extends Optional<AccountAttributes, 'acct_balance'> {}
+
+// Interface for the model
+interface AccountInstance
+  extends Model<AccountAttributes, AccountCreationAttributes>,
+    AccountAttributes {}
+
+const Account = sequelize.define<AccountInstance>(
   'account',
   {
     branch_code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     acct_no: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cust_no: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     acct_type_id: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     acct_balance: {
-      type: Sequelize.DECIMAL,
+      type: DataTypes.DECIMAL,
       allowNull: true,
     },
   },

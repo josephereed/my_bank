@@ -1,35 +1,48 @@
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../dbConnection';
-import Sequelize = require('sequelize');
 
-const Branch = sequelize.define(
+// Strict typechecking for attributes
+interface BranchInstance extends Model {
+  branch_code: string;
+  branch_name: string;
+  branch_address1: string;
+  branch_address2: string;
+  branch_city: string;
+  branch_zip: string;
+  branch_state: string;
+}
+
+// interface for model
+
+const Branch = sequelize.define<BranchInstance>(
   'customer',
   {
     branch_code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     branch_name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     branch_address1: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     branch_address2: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     branch_city: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     branch_zip: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     branch_state: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

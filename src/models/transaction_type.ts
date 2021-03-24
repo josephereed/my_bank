@@ -1,16 +1,21 @@
+import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../dbConnection';
-import Sequelize = require('sequelize');
-import { Transaction } from 'sequelize';
 
-const TransactionType = sequelize.define(
+// Stricter typechecking for attributes
+interface TransactionTypeInstance extends Model {
+  trans_type_id: string;
+  trans_type_desc: string;
+}
+
+const TransactionType = sequelize.define<TransactionTypeInstance>(
   'transaction_type',
   {
     trans_type_id: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     trans_type_desc: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

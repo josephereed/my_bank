@@ -8,5 +8,3 @@ export const sync = async () => {
     console.error(error);
   }
 };
-
-

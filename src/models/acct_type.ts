@@ -1,20 +1,35 @@
-import Sequelize = require('sequelize');
-
+import { Model, DataTypes, Optional } from 'sequelize';
 import sequelize from '../dbConnection';
 
-const Acct_type = sequelize.define(
+// Attributes for stricter typechecking
+interface AcctTypeAttributes {
+  acct_type_id: string;
+  acct_type_desc: string;
+  acct_type_interest_rate: string;
+}
+
+// OptionalAttributes
+interface AcctTypeCreationAttributes
+  extends Optional<AcctTypeAttributes, 'acct_type_interest_rate'> {}
+
+// Define interface for the model
+interface AcctTypeInstance
+  extends Model<AcctTypeAttributes, AcctTypeCreationAttributes>,
+    AcctTypeAttributes {}
+
+const Acct_type = sequelize.define<AcctTypeInstance>(
   'acct_type',
   {
     acct_type_id: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     acct_type_desc: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     acct_type_interest_rate: {
-      type: Sequelize.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true,
     },
   },
