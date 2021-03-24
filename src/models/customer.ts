@@ -4,7 +4,7 @@ import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
 // import created connection
 import sequelize from '../dbConnection';
 
-interface CustomerAttributes {
+export interface CustomerAttributes {
   cust_no: number;
   branch_code: string;
   cust_username: string;
@@ -23,11 +23,11 @@ interface CustomerAttributes {
 interface CustomerCreationAttributes
   extends Optional<CustomerAttributes, 'cust_email'> {}
 
-interface CustomerInstance
+export interface CustomerInstance
   extends Model<CustomerAttributes, CustomerCreationAttributes>,
     CustomerAttributes {}
 
-const Customer = sequelize.define<CustomerInstance>(
+export const Customer = sequelize.define<CustomerInstance>(
   'customer',
   {
     cust_no: {
@@ -87,5 +87,3 @@ const Customer = sequelize.define<CustomerInstance>(
     freezeTableName: true,
   }
 );
-
-export default Customer;
