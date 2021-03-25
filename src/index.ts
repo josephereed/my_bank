@@ -5,7 +5,7 @@ import { sync } from './models/index';
 require('./dbConnection');
 const routes = require('./routes');
 
-//sync();
+// sync();
 // Server
 const app = express();
 const PORT = process.env.PORT || 5000;
