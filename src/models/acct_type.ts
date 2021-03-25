@@ -18,7 +18,7 @@ interface AcctTypeInstance
     AcctTypeAttributes {}
 
 const Acct_type = sequelize.define<AcctTypeInstance>(
-  'acct_type',
+  'acct_types',
   {
     acct_type_id: {
       type: DataTypes.STRING,

@@ -22,11 +22,12 @@ interface TransactionInstance
     TransactionAttributes {}
 
 const Transaction = sequelize.define<TransactionInstance>(
-  'transaction_history',
+  'transaction_histories',
   {
     trans_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      unique: true,
     },
     branch_code: {
       type: DataTypes.STRING,
@@ -34,11 +35,19 @@ const Transaction = sequelize.define<TransactionInstance>(
     },
     acct_no: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
+      // references: {
+      //   model: 'accounts',
+      //   key: 'acct_no',
+      // },
     },
     trans_type_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      // references: {
+      //   model: 'transaction_types',
+      //   key: 'trans_type_id',
+      // },
     },
     trans_post_date: {
       // Might present an issue

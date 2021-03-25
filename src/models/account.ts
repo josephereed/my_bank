@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 import sequelize from '../dbConnection';
 
 // Declare interface for attributes for strict typechecking
@@ -20,7 +20,7 @@ interface AccountInstance
     AccountAttributes {}
 
 const Account = sequelize.define<AccountInstance>(
-  'account',
+  'accounts',
   {
     branch_code: {
       type: DataTypes.STRING,
@@ -29,14 +29,23 @@ const Account = sequelize.define<AccountInstance>(
     acct_no: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     cust_no: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      // allowNull: false,
+      // references: {
+      //   model: 'customers',
+      //   key: 'cust_no',
+      // },
     },
     acct_type_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      // references: {
+      //   model: 'acct_types',
+      //   key: 'acct_type_id',
+      // },
     },
     acct_balance: {
       type: DataTypes.DECIMAL,

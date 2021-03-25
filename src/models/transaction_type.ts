@@ -8,11 +8,12 @@ interface TransactionTypeInstance extends Model {
 }
 
 const TransactionType = sequelize.define<TransactionTypeInstance>(
-  'transaction_type',
+  'transaction_types',
   {
     trans_type_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     trans_type_desc: {
       type: DataTypes.STRING,

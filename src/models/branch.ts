@@ -15,11 +15,12 @@ interface BranchInstance extends Model {
 // interface for model
 
 const Branch = sequelize.define<BranchInstance>(
-  'customer',
+  'branches',
   {
     branch_code: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     branch_name: {
       type: DataTypes.STRING,

@@ -21,22 +21,27 @@ export interface CustomerAttributes {
 }
 
 interface CustomerCreationAttributes
-  extends Optional<CustomerAttributes, 'cust_email'> {}
+  extends Optional<CustomerAttributes, 'cust_no' | 'cust_email'> {}
 
 export interface CustomerInstance
   extends Model<CustomerAttributes, CustomerCreationAttributes>,
     CustomerAttributes {}
 
 export const Customer = sequelize.define<CustomerInstance>(
-  'customer',
+  'customers',
   {
     cust_no: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
     },
     branch_code: {
       type: DataTypes.STRING,
       allowNull: false,
+      // references: {
+      //   model: 'branches',
+      //   key: 'branch_code',
+      // },
     },
     cust_username: {
       type: DataTypes.STRING,
