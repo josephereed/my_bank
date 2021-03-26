@@ -98,7 +98,7 @@ Customer.beforeCreate(async (user: CustomerInstance, options) => {
   user.cust_password = await bcrypt.hash(user.cust_password, salt);
 });
 
-Customer.prototype.validatePassword(
+Customer.prototype.validatePassword = (
   async (user: CustomerInstance, password: String) => {
     return await bcrypt.compare(password, user.cust_password);
   }
