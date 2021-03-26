@@ -1,6 +1,6 @@
 // import base module
-import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
-
+import { Sequelize, Model, DataTypes, Optional, UUIDV4 } from 'sequelize';
+import bcrypt from 'bcrypt';
 // import created connection
 import sequelize from '../dbConnection';
 
@@ -32,8 +32,8 @@ export const Customer = sequelize.define<CustomerInstance>(
   {
     cust_no: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     branch_code: {
       type: DataTypes.STRING,
@@ -90,5 +90,16 @@ export const Customer = sequelize.define<CustomerInstance>(
   },
   {
     freezeTableName: true,
+  }
+);
+
+Customer.beforeCreate(async (user: CustomerInstance, options) => {
+  const salt = await bcrypt.genSalt(10);
+  user.cust_password = await bcrypt.hash(user.cust_password, salt);
+});
+
+Customer.prototype.validatePassword(
+  async (user: CustomerInstance, password: String) => {
+    return await bcrypt.compare(password, user.cust_password);
   }
 );
