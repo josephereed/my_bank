@@ -21,9 +21,10 @@ router.post('/login', async (req: Request, res: Response) => {
       );
       const accessToken = jwt.sign(
         { username: matchedUser.cust_username },
-        <string>process.env.SECRET_KEY
+        <string>process.env.SECRET_KEY,
+        { expiresIn: '2400s' }
       );
-      res.send(accessToken);
+      res.json({ token: accessToken });
     }
   } catch (error) {
     res.send(error);
