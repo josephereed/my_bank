@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { Customer, CustomerInstance } from '../models/customer';
+import jwt from 'jsonwebtoken';
+require('dotenv').config();
 
 const router = require('express').Router();
 
@@ -13,16 +15,15 @@ router.post('/login', async (req: Request, res: Response) => {
     if (!matchedUser) {
       res.send('Credentials not valid').status(401);
     } else {
-      try {
-        const match = await Customer.prototype.validatePassword(
-          matchedUser,
-          req.body.password
-        );
-        res.send(match);
-      } catch (error) {
-        res.send(error);
-      }
-      res.send();
+      const match = await Customer.prototype.validatePassword(
+        matchedUser,
+        req.body.password
+      );
+      const accessToken = jwt.sign(
+        { username: matchedUser.cust_username },
+        <string>process.env.SECRET_KEY
+      );
+      res.send(accessToken);
     }
   } catch (error) {
     res.send(error);
