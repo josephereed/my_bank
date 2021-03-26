@@ -1,11 +1,11 @@
 // Modules
-import express = require('express');
+import express from 'express';
 import path = require('path');
-import { sync } from './models/index';
-require('./dbConnection');
-const routes = require('./routes');
+import sequelize from './dbConnection';
+import { signUpRouter } from './routes/signup';
 
-// sync();
+// sequelize.sync({ force: true });
+
 // Server
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use(express.static(path.join(__dirname, '../src/client/build')));
 app.use(express.json());
-app.use('/', routes);
+app.use(signUpRouter);
 
 // DB
 

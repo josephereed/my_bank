@@ -1,18 +1,14 @@
 import path = require('path');
 import { Request, Response } from 'express';
 
-const routes = require('express').Router();
-import { Customer, CustomerInstance } from './models/customer';
+const router = require('express').Router();
+import { Customer, CustomerInstance } from '../models/customer';
 
-routes.get('/ping', (req: Request, res: Response) => {
+router.get('/ping', (req: Request, res: Response) => {
   res.send('Pong');
 });
 
-// routes.get('/', (req: Request, res: Response) => {
-//   res.sendFile(path.join(__dirname, '../src/client/build/index.html'));
-// });
-
-routes.post('/register', async (req: Request, res: Response) => {
+router.post('/register', async (req: Request, res: Response) => {
   // Check if user already exists
   const matchedUser = await Customer.findOne<CustomerInstance>({
     where: { cust_username: req.body.username },
@@ -34,13 +30,16 @@ routes.post('/register', async (req: Request, res: Response) => {
         cust_zip: req.body.zip,
         cust_email: req.body.email!,
       });
+      await newCustomer.save();
       res.send(newCustomer);
       console.log(newCustomer instanceof Customer);
       console.log(newCustomer.cust_givenname);
     } catch (error) {
       res.send(error);
     }
+  } else {
+    res.send('This user already exists');
   }
 });
 
-module.exports = routes;
+export { router as signUpRouter };
