@@ -37,7 +37,7 @@ export const Customer = sequelize.define<CustomerInstance>(
     },
     branch_code: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       // references: {
       //   model: 'branches',
       //   key: 'branch_code',
@@ -57,7 +57,7 @@ export const Customer = sequelize.define<CustomerInstance>(
     },
     cust_title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     cust_givenname: {
       type: DataTypes.STRING,
@@ -69,7 +69,7 @@ export const Customer = sequelize.define<CustomerInstance>(
     },
     cust_address1: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     cust_address2: {
       type: DataTypes.STRING,
@@ -77,15 +77,15 @@ export const Customer = sequelize.define<CustomerInstance>(
     },
     cust_city: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     cust_zip: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     cust_state: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
@@ -98,8 +98,9 @@ Customer.beforeCreate(async (user: CustomerInstance, options) => {
   user.cust_password = await bcrypt.hash(user.cust_password, salt);
 });
 
-Customer.prototype.validatePassword = (
-  async (user: CustomerInstance, password: String) => {
-    return await bcrypt.compare(password, user.cust_password);
-  }
-);
+Customer.prototype.validatePassword = async (
+  user: CustomerInstance,
+  password: String
+) => {
+  return await bcrypt.compare(password, user.cust_password);
+};

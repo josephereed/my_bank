@@ -6,7 +6,7 @@ import { signUpRouter } from './routes/signUp';
 import { signInRouter } from './routes/signIn';
 import { currentUserRouter} from './routes/currentUser';
 
-// sequelize.sync({ force: true });
+ // sequelize.sync({ force: true });
 
 // Server
 const app = express();

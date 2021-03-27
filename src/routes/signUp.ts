@@ -24,11 +24,11 @@ router.post('/register', async (req: Request, res: Response) => {
         cust_givenname: req.body.givenName,
         cust_surname: req.body.surname,
         cust_address1: req.body.address1,
-        cust_address2: req.body.address2!,
+        cust_address2: req.body.address2,
         cust_city: req.body.city,
         cust_state: req.body.state,
         cust_zip: req.body.zip,
-        cust_email: req.body.email!,
+        cust_email: req.body.email,
       });
       await newCustomer.save();
       res.send(newCustomer);
