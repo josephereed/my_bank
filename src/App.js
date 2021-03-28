@@ -13,7 +13,6 @@ function App() {
     if (authenticate()) {
       setAuthenticated(true);
     }
-    //return () => {};
   }, []);
 
   return (
