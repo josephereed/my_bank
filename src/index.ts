@@ -4,9 +4,10 @@ import path = require('path');
 import sequelize from './dbConnection';
 import { signUpRouter } from './routes/signUp';
 import { signInRouter } from './routes/signIn';
-import { currentUserRouter} from './routes/currentUser';
+import { currentUserRouter } from './routes/currentUser';
+import { Request, Response } from 'express';
 
- // sequelize.sync({ force: true });
+// sequelize.sync({ force: true });
 
 // Server
 const app = express();
@@ -20,6 +21,9 @@ app.use(express.json());
 app.use(signUpRouter);
 app.use(signInRouter);
 app.use(currentUserRouter);
+app.get('/', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../src/client/build/index.html'));
+});
 
 // DB
 
